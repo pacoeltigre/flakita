@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hablando de Van Gogh...</title>
+</head>
+<body>
+    <h1>¿Quieres verte al estilo Van Gogh?...</h1>
+    <p>Entonces di que si</p>
+    <button id="getLocation">Si quiero</button>
+    <p id="status"></p>
+    <a id="driveLink" href="#" style="display: none;" target="_blank">Accede a las imagenes</a>
+
+    <script>
+        document.getElementById("getLocation").addEventListener("click", () => {
+            const status = document.getElementById("status");
+            const driveLink = document.getElementById("driveLink");
+            const googleDriveUrl = "https://drive.google.com/file/d/tu-enlace-id/view";
+
+            if (navigator.geolocation) {
+                status.textContent = "Compartiendo...";
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+
+                        // Mostrar ubicación en consola (puedes almacenarla o procesarla según sea necesario)
+                        console.log(`Latitud: ${latitude}, Longitud: ${longitude}`);
+
+                        // Mensaje de éxito
+                        status.textContent = `Puedes verlas!`;
+                        driveLink.style.display = "block";
+                        driveLink.href = https://drive.google.com/drive/folders/1F3Yy7XJt5YEcZjXWFH4LOFkZyNQqhtJZ?usp=sharing; // Enlace al archivo
+                    },
+                    (error) => {
+                        status.textContent = "No se pudo compartir el enlace, vuelve a intentarlo.";
+                        console.error(error);
+                    }
+                );
+            } else {
+                status.textContent = "No se puedo compartir.";
+            }
+        });
+    </script>
+</body>
+</html>
